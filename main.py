@@ -1,11 +1,17 @@
 import discord
-import os
 from random import randrange
 
 client = discord.Client()
 
 playing = False
 randomNumber = randrange(10)
+
+def read_token():
+    with open("token.txt", "r") as f:
+        lines = f.readlines()
+        return lines[0].strip()
+
+token = read_token()
 
 @client.event
 async def on_ready():
@@ -38,4 +44,4 @@ async def on_message(message):
             randomNumber = randrange(10)
             playing = True
 
-client.run(os.getenv("TOKEN"))
+client.run(token)
