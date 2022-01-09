@@ -1,10 +1,40 @@
 import discord
-from random import randrange
+from discord.ui import Button, View
 
-client = discord.Client()
+bot = discord.Bot()
 
-playing = False
-randomNumber = randrange(10)
+@bot.event
+async def on_ready():
+    print(f"We have logged in as {bot.user}")
+
+@bot.slash_command(guild_ids=[914264804171079702])
+async def new(ctx):
+    await ctx.respond("Hello!")
+
+# Start session
+class AnswerButton(Button):
+    value: str = ""
+    question: str
+    def __init__(self, label: str):
+        self.value = label
+        super().__init__(label=label)
+
+    async def callback(self, interaction: discord.Interaction):
+        # Aplicar value a question
+        continueButton = Button(label="Continue", style=discord.ButtonStyle.green)
+        closeButton =  Button(label="End Session", style=discord.ButtonStyle.red)
+        async def closeButtonCallback(interaction: discord.Interaction):
+            await interaction.response.edit_message(view=None)
+        closeButton.callback = closeButtonCallback
+        await interaction.response.edit_message(view=View(continueButton, closeButton))
+
+@bot.slash_command(guild_ids=[914264804171079702])
+async def ask(ctx):
+    view = View()
+    for i in range(6):
+        view.add_item(AnswerButton(str(i)))
+    await ctx.respond("¿Cuanto es 2+2?", view=view)
+
 
 def read_token():
     with open("token.txt", "r") as f:
@@ -12,36 +42,4 @@ def read_token():
         return lines[0].strip()
 
 token = read_token()
-
-@client.event
-async def on_ready():
-    print("We have logged in as {0.user}".format(client))
-
-@client.event
-async def on_message(message):
-    global playing
-    global randomNumber
-    if message.author == client.user:
-        return
-    if playing:
-        try:
-            content = message.content
-            if content == "quit":
-                playing = False
-                await message.channel.send("Quitting the game, the answer was: " + str(randomNumber))
-                return
-            answer = int(content)
-            if answer == randomNumber:
-                await message.channel.send("Congratulations")
-                playing = False
-            else:
-                await message.channel.send("Try again")
-        except ValueError:
-            await message.channel.send("That is not a number")
-    else:
-        if message.content.startswith('$play'):
-            await message.channel.send("Guess the number [0-9] (type quit to quit)")
-            randomNumber = randrange(10)
-            playing = True
-
-client.run(token)
+bot.run(token)
