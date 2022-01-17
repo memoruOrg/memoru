@@ -9,7 +9,7 @@ async def on_ready():
     print(f"We have logged in as {bot.user}")
 
 @bot.slash_command(guild_ids=[914264804171079702])
-async def new(ctx: discord.ApplicationContext, question: str, answer: str):
+async def new(ctx: discord.ApplicationContext, question: str, answer: str): # Conseguir tipo de verdad ctx
     # print(ctx.author.id)
     Card.cardSlice.add(question, answer)
     await ctx.respond("Carta creada")
@@ -35,15 +35,16 @@ class AnswerButton(Button):
 
 @bot.slash_command(guild_ids=[914264804171079702])
 async def ask(ctx):
+    card = Card.cardSlice.get()
     viewButtons = View()
     for i in range(6):
-        viewButtons.add_item(AnswerButton(i, Card.cardSlice[0]))
+        viewButtons.add_item(AnswerButton(i, card))
     buttonAnswer = Button(label="Show Answer")
     viewAnswer = View(buttonAnswer)
     async def buttonAnswerCallback(interaction: discord.Interaction):
-        await interaction.response.send_message(Card.cardSlice[0][1], view=viewButtons)
+        await interaction.response.send_message(card.answer , view=viewButtons)
     buttonAnswer.callback =  buttonAnswerCallback
-    await ctx.respond(Card.cardSlice[0][0], view=viewAnswer)
+    await ctx.respond(card.question, view=viewAnswer)
 
 def read_token():
     with open("token.txt", "r") as f:
