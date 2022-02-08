@@ -14,45 +14,56 @@ INTERVAL_DEFAULT: int = 1
 
 class DataBase:
     def __init__(self):
-        self.client = MongoClient("mongodb+srv://GGCristo:764319@cluster0.kndqg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        self.client = MongoClient('mongodb+srv://GGCristo:764319@cluster0.kndqg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
         self.db = self.client['users']
 
     def add(self, user, question: str, answer: str) -> bool:
-        if self.db[str(user)].find_one( {"question": question} ) == None:
+        if self.db[str(user)].find_one( {'question': question} ) == None:
             self.db[str(user)].insert_one({
-                                            "question": question,
-                                            "answer": answer,
-                                            "repetitions": REPETITIONS_DEFAULT,
-                                            "easiness": EASINESS_DEFAULT,
-                                            "interval": INTERVAL_DEFAULT
+                                            'question': question,
+                                            'answer': answer,
+                                            'repetitions': REPETITIONS_DEFAULT,
+                                            'easiness': EASINESS_DEFAULT,
+                                            'interval': INTERVAL_DEFAULT
                                     })
             return True
         return False
 
     def get(self, user: int):
-        return self.db[str(user)].find_one(sort=[("interval", 1)])
+        self.db[str(user)].update_one({
+                                          'type': 'information'
+                                      },
+                                      {
+                                          '$inc': {'cards_received': 1}
+                                      }, upsert=True)
+        return self.db[str(user)].find_one({
+                                               'question': {'$exists':True},
+                                               'answer': {'$exists':True},
+                                               'interval': {'$exists':True},
+                                           },
+                                           sort=[("interval", 1)])
 
     def get_all(self, user: int):
         return self.db[str(user)].find()
 
     def delete(self, user: int, questions: list[str]):
         for question in questions:
-            self.db[str(user)].delete_one( {"question": question} )
+            self.db[str(user)].delete_one( {'question': question} )
 
-    def update_quality(self, user: int, card, quality: int, time_answer: float):
+    def update_quality(self, user: int, card, quality: int):
         new_easiness, new_interval, new_repetitions = update_quality(card['interval'], card['easiness'], card['repetitions'], quality)
         self.db[str(user)].update_one({
                                           '_id': card['_id']
                                       },
                                       {
-                                      '$set': {
+                                          '$set': {
                                               'easiness': new_easiness,
                                               'interval': new_interval,
                                               'repetitions': new_repetitions,
                                           }
-                                      }, upsert=False)
+                                      })
 
-    def reset(self, user:int):
+    def reset(self, user: int):
         self.db[str(user)].update_many({
                                            'question': {'$exists':True},
                                            'answer': {'$exists':True}
@@ -64,8 +75,33 @@ class DataBase:
                                                "repetitions": REPETITIONS_DEFAULT
                                            }
                                        })
+        self.db[str(user)].update_one({
+                                          'type': 'information'
+                                      },
+                                      {
+                                          '$set': {
+                                              'cards_received':0
+                                          }
+                                      })
+    def info(self, user: int):
+        return {
+            'number_cards': self.db[str(user)].count_documents({
+                                                                   'question': {'$exists':True},
+                                                                   'answer': {'$exists':True}
+                                                               },
+                                                               ),
+            'cards_received': self.db[str(user)].find_one({
+                                                              'type': 'information'
+                                                          },
+                                                          {
+                                                              '_id': False,
+                                                              'cards_received':True
+                                                          })["cards_received"]
 
-    def isEmpty(self, user: int):
+        }
+
+
+    def isEmpty(self, user: int) -> bool:
         return self.db[str(user)].find_one() == None
 
 def update_quality(interval, easiness, repetitions, quality):

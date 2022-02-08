@@ -28,9 +28,16 @@ async def delete(ctx):
     view = View(DropDown(ctx.author.id))
     await ctx.respond("Question log:", view=view)
 
+@bot.slash_command(guild_ids=[914264804171079702], description="Get information about your sessions")
+async def info(ctx):
+    info = data_base.info(ctx.author.id)
+    await ctx.respond("Number of Cards: " + str(info["number_cards"]) + 
+                          "\nNumber of cards received: " + str(info["cards_received"]) + "\n")
+
 @bot.slash_command(guild_ids=[914264804171079702], description="Set all Cards fields to their default. Preserve \"front\" and \"back\" fields")
 async def reset(ctx):
     data_base.reset(ctx.author.id)
+    await ctx.respond("Information has been reset to its original values")
 
 def read_token():
     with open("token.txt", "r") as f:
