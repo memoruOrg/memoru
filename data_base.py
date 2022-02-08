@@ -52,7 +52,7 @@ class DataBase:
         for question in questions:
             self.db[str(user)].delete_one( {'question': question} )
 
-    def update_quality(self, user: int, card, quality: int):
+    def update(self, user: int, card, quality: int):
         new_easiness, new_interval, new_repetitions = update_quality(card['interval'], card['easiness'], card['repetitions'], quality)
         self.db[str(user)].update_one({
                                           '_id': card['_id']
