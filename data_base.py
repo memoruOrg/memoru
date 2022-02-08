@@ -86,20 +86,22 @@ class DataBase:
                                           }
                                       })
     def info(self, user: int):
+        cards_received = self.db[str(user)].find_one({
+                                                         'type': 'information'
+                                                     },
+                                                     {
+                                                         '_id': False,
+                                                         'cards_received':True
+                                                     })["cards_received"] 
+
+
         return {
             'number_cards': self.db[str(user)].count_documents({
                                                                    'question': {'$exists':True},
                                                                    'answer': {'$exists':True}
                                                                },
                                                                ),
-            'cards_received': self.db[str(user)].find_one({
-                                                              'type': 'information'
-                                                          },
-                                                          {
-                                                              '_id': False,
-                                                              'cards_received':True
-                                                          })["cards_received"]
-
+            'cards_received': cards_received if cards_received != None else 0
         }
 
 

@@ -19,8 +19,8 @@ class answer_button_(Button):
         if interaction.user.id != self.ctx.author.id:
             return await interaction.response.send_message(content="You are not allowed to do this", ephemeral=True)
         global time_answer
-        data_base.update_quality(self.ctx.author.id, self.card, self.quality, time_answer)
-        time_answer = 0
+        data_base.update_quality(self.ctx.author.id, self.card, self.quality)
+        time_answer = 0 # Reset response time for the next time
         continueButton = Button(label="Continue", style=discord.ButtonStyle.green)
         closeButton =  Button(label="End Session", style=discord.ButtonStyle.red)
         async def continueButtonCallback(interaction: discord.Interaction):
