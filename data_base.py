@@ -92,16 +92,16 @@ class DataBase:
                                                      {
                                                          '_id': False,
                                                          'cards_received':True
-                                                     })["cards_received"] 
+                                                     })
 
 
         return {
             'number_cards': self.db[str(user)].count_documents({
                                                                    'question': {'$exists':True},
                                                                    'answer': {'$exists':True}
-                                                               },
+                                                               }
                                                                ),
-            'cards_received': cards_received if cards_received != None else 0
+            'cards_received': cards_received['cards_received'] if cards_received != None else 0
         }
 
 
