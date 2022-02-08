@@ -44,7 +44,9 @@ class DataBase:
                                            sort=[("interval", 1)])
 
     def get_all(self, user: int):
-        return self.db[str(user)].find()
+        return self.db[str(user)].find({
+                                           'question': {'$exists': True}
+                                       })
 
     def delete(self, user: int, questions: list[str]):
         for question in questions:
