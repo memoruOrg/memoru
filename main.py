@@ -39,7 +39,7 @@ async def reset(ctx):
     data_base.reset(ctx.author.id)
     await ctx.respond("Information has been reset to its original values")
 
-def read_token():
+def read_token() -> str:
     with open("token.txt", "r") as f:
         lines = f.readlines()
         return lines[0].strip()

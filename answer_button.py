@@ -1,7 +1,6 @@
 import discord
 from discord.ui import Button, View
 from data_base import data_base
-from time import time
 
 
 class answer_button_(Button):

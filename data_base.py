@@ -14,7 +14,7 @@ INTERVAL_DEFAULT: int = 1
 
 class DataBase:
     def __init__(self):
-        self.client = MongoClient('mongodb+srv://GGCristo:764319@cluster0.kndqg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+        self.client = MongoClient(authenticate_connection())
         self.db = self.client['users']
 
     def add(self, user, question: str, answer: str) -> bool:
@@ -53,7 +53,7 @@ class DataBase:
             self.db[str(user)].delete_one( {'question': question} )
 
     def update(self, user: int, card, quality: int):
-        new_easiness, new_interval, new_repetitions = update_quality(card['interval'], card['easiness'], card['repetitions'], quality)
+        new_easiness, new_interval, new_repetitions = update_card_values(card['interval'], card['easiness'], card['repetitions'], quality)
         self.db[str(user)].update_one({
                                           '_id': card['_id']
                                       },
@@ -108,7 +108,7 @@ class DataBase:
     def isEmpty(self, user: int) -> bool:
         return self.db[str(user)].find_one() == None
 
-def update_quality(interval, easiness, repetitions, quality):
+def update_card_values(interval, easiness, repetitions, quality):
     assert quality >= 0 and quality <= 5
 
     easiness = max(1.3, easiness + 0.1 - (5.0 - quality) * (0.08 + (5.0 - quality) * 0.02))
@@ -120,5 +120,10 @@ def update_quality(interval, easiness, repetitions, quality):
     elif repetitions == 2: interval = 6
     else: interval = round(interval * easiness)
     return [easiness, interval, repetitions]
+
+def authenticate_connection() -> str:
+    with open("./database_credentials.txt", "r") as f:
+        lines = f.readlines()
+        return lines[0].strip()
 
 data_base = DataBase()
