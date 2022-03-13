@@ -32,10 +32,10 @@
   
     - **[SuperMemo](https://www.supermemo.com/es):**
         - SuperMemo es un método de aprendizaje apoyado por un software. Además, es también una aplicación práctica de la repetición espaciada que fue propuesta por varios psicólogos sobre 1930.
-          <br>
-            <p style = 'text-align:center;'>
-            <img src="img/SuperMemo.jpeg" width="200px">
-          </p>
+                          <br>
+                          <p style = 'text-align:center;'>
+                            <img src="img/SuperMemo.jpeg" width="200px">
+                          </p>
   
 ## Recursos utilizados
 - Para la realización del proyecto los recursos que hemos utilizado han sido los siguientes:
