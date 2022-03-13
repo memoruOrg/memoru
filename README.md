@@ -33,8 +33,8 @@
     - **[SuperMemo](https://www.supermemo.com/es):**
         - SuperMemo es un método de aprendizaje apoyado por un software. Además, es también una aplicación práctica de la repetición espaciada que fue propuesta por varios psicólogos sobre 1930.
         <br>
-        <p style = 'align:center;'>
-          <img src="img/SuperMemo.jpeg">
+        <p style = 'text-align:center;'>
+          <img src="img/SuperMemo.png">
         </p>
   
 ## Recursos utilizados
@@ -72,5 +72,5 @@
     - **[Google Drive](https://www.google.com/intl/es_es/drive/):** Es un servicio de alojamiento de archivos el cual hemos utilizado para la realización de informes y de la presentación.
     <br>
     <p style = 'text-align:center;'>
-      <img src="img/Drive.jpg" width="300px">
+      <img src="img/Drive.png" width="300px">
     </p>
