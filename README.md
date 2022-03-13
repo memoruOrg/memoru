@@ -5,6 +5,7 @@
 [![](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/13ilzHWBFu3P-_kpnuvm971nxc1PsPIrq/view)
+[![GitHub Pages](https://img.shields.io/badge/Web-GitHub%20Pages-informational)](https://memoruorg.github.io/memoru/)
 - Universidad de La Laguna
 - **Asignatura:** Sistemas Inteligentes
 - **Proyecto Final de Asignatura:** Bot de Discord
