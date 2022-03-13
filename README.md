@@ -26,63 +26,51 @@
     - **[Anki](https://apps.ankiweb.net/):** 
         - Anki es un software para memorizar utilizando tarjetas. Este software utiliza la técnica de la repetición espaciada, ya que se ha demostrado que aumenta la tasa de memorización.
         <br>
-        <div>
-          <p style = 'text-align:center;'>
+        <p style = 'text-align:center;'>
           <img src="img/Anki.png" width="200px">
-          </p>
-        </div>
-
+        </p>
+  
     - **[SuperMemo](https://www.supermemo.com/es):**
         - SuperMemo es un método de aprendizaje apoyado por un software. Además, es también una aplicación práctica de la repetición espaciada que fue propuesta por varios psicólogos sobre 1930.
         <br>
-        <div>
-          <p style = 'text-align:center;'>
+            <p style = 'text-align:center;'>
           <img src="img/SuperMemo.jpeg" width="200px">
-          </p>
-        </div>
-
+        </p>
+  
 ## Recursos utilizados
 - Para la realización del proyecto los recursos que hemos utilizado han sido los siguientes:
     - **[Python](https://www.python.org/downloads/):** Lenguaje de programación que permite crear fácilmente prototipos o aplicaciones que no vayan a variar o escalar demasiado.
-    <div>
-      <p style = 'text-align:center;'>
+    <br>
+    <p style = 'text-align:center;'>
       <img src="img/Python.png" width="300px">
-      </p>
-    </div>
- 
+    </p> 
+    
     - **[API para bots de Discord](https://support.discord.com/hc/es/articles/212889058-API-Oficial-de-Discord):** Debido a que nuestro sistema solo es eficiente si se usa con constancia, es por ello que hemos decidido integrarlo en una aplicación de uso cotidiano como Discord, con la finalidad de que sea cómoda de utilizar para el usuario.
-    <div>
-      <p style = 'text-align:center;'>
+    <br>
+    <p style = 'text-align:center;'>
       <img src="img/Discord.png" width="200px">
-      </p>
-    </div>
- 
+    </p> 
+    
     - **[MongoDB](https://www.mongodb.com/):** Es un sistema de base de datos NoSQL, orientado a documentos. Este sistema, guarda estructuras de datos BSON con un esquema dinámico, haciendo que la integración de los datos en ciertas aplicaciones sea más fácil y rápida.
-    <div>
-      <p style = 'text-align:center;'>
+    <br>
+    <p style = 'text-align:center;'>
       <img src="img/Mongo.png" width="300px">
-      </p>
-    </div>
-
+    </p>
+    
     - **[Heroku](https://www.heroku.com/):** Debido a la facilidad de uso y un buen sistema gratuito Heroku es el sistema donde vamos a “hostear” el bot.
     <br>
-    <div>
-      <p style = 'text-align:center;'>
+    <p style = 'text-align:center;'>
       <img src="img/Heroku.png" width="300px">
-      </p>
-    </div>
- 
+    </p> 
+    
     - **[Github](https://github.com/):** Software utilizado para mantener un control de versiones del código desarrollado.
     <br>
-    <div>
-      <p style = 'text-align:center;'>
+    <p style = 'text-align:center;'>
       <img src="img/Git.png" width="300px">
-      </p>
-    </div>
+    </p>
 
     - **[Google Drive](https://www.google.com/intl/es_es/drive/):** Es un servicio de alojamiento de archivos el cual hemos utilizado para la realización de informes y de la presentación.
-    <div>
-      <p style = 'text-align:center;'>
+    <br>
+    <p style = 'text-align:center;'>
       <img src="img/Drive.jpg" width="300px">
-      </p>
-    </div>
+    </p>
